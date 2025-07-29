@@ -1,4 +1,5 @@
-na_sales,1.1
-pal_sales,0.86
-jp_sales,0.1
-other_sales,0.28
+,regiao_sigla,regiao_nome,vendas
+0,na_sales,América do Norte,1.1
+1,pal_sales,Europa,0.86
+2,jp_sales,Japão,0.1
+3,other_sales,Outras regiões,0.28

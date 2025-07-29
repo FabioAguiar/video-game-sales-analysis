@@ -1,49 +1,112 @@
-# Análise de Vendas de Video Games
 
-Este projeto tem como objetivo explorar e analisar dados de vendas de jogos eletrônicos com o intuito de extrair insights do mercado e compreender tendências de lançamentos por console, gênero, desenvolvedora, publicadora e fabricante. O trabalho combina **pré-processamento e transformação dos dados** (usando Python com Pandas) e a criação de dashboards interativos no **Power BI**.
+# Previsão de Sucesso de Jogos com Machine Learning
 
----
+Este projeto tem como objetivo aplicar técnicas de Machine Learning para prever se um jogo será um sucesso com base em atributos como plataforma, gênero, ano de lançamento e outros. O processo foi dividido em três notebooks principais, análise dos dados e visualização com Power BI.
 
-## 📁 Sobre o Projeto
+## Estrutura do Projeto
 
-O projeto é dividido em duas partes principais:
+```
+├── Notebooks
+│   ├── 01_preprocessamento_vg_sales.ipynb
+│   ├── 02_modelagem_vg_sales_success.ipynb
+│   └── 03_insights_vg_sales_success.ipynb
+├── Dados tratados
+│   ├── vg_sales_tratado.csv
+│   ├── analise_genero_sucesso_acuracia.csv
+│   ├── analise_console_sucesso_acuracia.csv
+│   ├── analise_fabricante_previsao_acuracia.csv
+│   └── analise_regiao_sucesso.csv
+├── Power BI
+│   └── Dashboard.pbix
+├── Prints
+│   ├── matriz_dummy.png
+│   ├── matriz_knn.png
+│   ├── matriz_random_forest.png
+│   ├── matriz_logistic_regression.png
+│   ├── dashboard_pagina1.png
+│   └── dashboard_pagina2.png
+└── README.md
+```
 
-1. **Preparação e Tratamento dos Dados:**  
-   Os dados foram obtidos através da plataforma [Maven Analytics](https://www.mavenanalytics.io/) e passaram por um processo de limpeza e transformação. [Link para download direto](https://maven-datasets.s3.amazonaws.com/Video+Game+Sales/Video+Game+Sales.zip) .
-   - Foram selecionadas as colunas relevantes: `title`, `console`, `genre`, `publisher`, `developer`, `release_date`.
-   - A coluna `release_date` foi convertida para o tipo `datetime` e, a partir dela, foi extraída a coluna `ano`.
-   - 17 registros nulos na coluna `developer` foram substituídos por `"Não informado"`.
-   - 6648 registros com datas ausentes foram removidos (na coluna `release_date`, e consequentemente na coluna `ano`).
-   - Foi feita uma filtragem para manter somente os consoles mais representativos, baseados em uma lista pré-definida (`consoles_validos`).
-   - Criada a coluna `fabricante` para agrupar os consoles por empresa (por exemplo, todos os consoles da linha Playstation foram agrupados como "Sony", os do Xbox como "Microsoft", entre outros).
-   - Por fim, uma tabela calendário foi construída (com frequência diária) para enriquecer as análises temporais no Power BI, permitindo a extração de colunas derivadas como ano, mês, trimestre, dia da semana etc.
+## 1. Pré-processamento (`01_preprocessamento_vg_sales.ipynb`)
 
-2. **Desenvolvimento dos Dashboards no Power BI:**  
-   Foram criados dois dashboards com o intuito de explorar diferentes aspectos dos dados:
-   - **Dashboard 1: Video Game Market Insights**  
-     *Funcionalidades e Visualizações:*  
-     - Exibição de KPIs de vendas globais (total de vendas, títulos únicos, desenvolvedoras, publicadoras, consoles etc.).
-     - Gráficos de barras mostrando a evolução dos lançamentos ao longo do tempo.
-     - Filtros dinâmicos para segmentação por mês, ano, console, gênero e desenvolvedora.
+Neste notebook, foram realizadas as seguintes etapas:
 
-     ![Dashboard 1 - Vendas Globais](Prints Dashboard/dashboard_1.png)
+- Limpeza e tratamento dos dados originais.
+- Criação de variáveis categóricas ajustadas (como fabricante do console).
+- Criação de coluna target `Sucesso`, baseada em percentis de vendas globais.
+- Exportação do dataset tratado.
 
-   - **Dashboard 2: Visão Geral: Jogos, Fabricantes e Consoles**  
-     *Funcionalidades e Visualizações:*  
-     - Gráficos comparativos (barras, pizza) detalhando a distribuição de títulos por console e fabricante.
-     - Análises de diversidade de gêneros por fabricante.
-     - Visualizações que permitem identificar as plataformas com maior volume de lançamentos e os fabricantes mais ativos.
-     - Segmentações que possibilitam cruzar variáveis como ano, console, gênero e fabricante.
+## 2. Modelagem (`02_modelagem_vg_sales_success.ipynb`)
 
-     ![Dashboard 2 - Consoles e Fabricantes](Prints Dashboard/dashboard_2.png)
+Aqui foram aplicados os seguintes modelos de classificação:
 
----
+- Dummy Classifier
+- K-Nearest Neighbors (KNN)
+- Random Forest
+- Regressão Logística
 
-## 🛠️ Tecnologias Utilizadas
+Todos os modelos foram treinados em um pipeline com tratamento de variáveis numéricas e categóricas, além de validação cruzada.
 
-- **Linguagens e Bibliotecas:**  
-  - Python e Pandas  
-  - Jupyter Notebook para análise e transformação dos dados
+### Matriz de Confusão dos Modelos
 
-- **Ferramentas de Visualização:**  
-  - Power BI para desenvolvimento dos dashboards
+**Dummy Classifier**  
+![Dummy](Prints/matriz_dummy.png)
+
+**KNN**  
+![KNN](Prints/matriz_knn.png)
+
+**Random Forest**  
+![Random Forest](Prints/matriz_random_forest.png)
+
+**Logistic Regression**  
+![Logistic Regression](Prints/matriz_logistic_regression.png)
+
+## 3. Geração de Insights (`03_insights_vg_sales_success.ipynb`)
+
+Foram realizadas análises para responder às seguintes perguntas:
+
+- Quais gêneros têm maior chance de sucesso?
+- Quais consoles possuem maior taxa de acerto do modelo?
+- Como os fabricantes se comportam em relação às previsões de sucesso?
+- Qual a distribuição geográfica dos jogos bem-sucedidos?
+
+Os dados gerados foram exportados para uso no Power BI.
+
+## Análise Geral da Acurácia
+
+Todos os modelos previram melhor que o classificador aleatório (Dummy). O modelo de Regressão Logística e Random Forest apresentaram melhor equilíbrio entre sensibilidade e especificidade.
+
+## Dashboard (`Power BI/Dashboard.pbix`)
+
+Foi desenvolvido um painel interativo com as seguintes visões:
+
+- Gêneros mais bem-sucedidos por região.
+- Plataformas com maior concentração de jogos bem-sucedidos.
+- Desempenho por fabricante.
+- Evolução anual do sucesso de jogos.
+
+### Prints do Dashboard
+
+![Página 1](Prints/dashboard_pagina1.png)  
+![Página 2](Prints/dashboard_pagina2.png)
+
+## Fonte dos Dados
+
+Os dados utilizados neste projeto estão disponíveis em:  
+[Kaggle - Video Game Sales](https://www.kaggle.com/datasets/gregorut/videogamesales)
+
+**Sobre o dataset:**  
+Este conjunto contém jogos com vendas acima de 100.000 cópias, extraídos do site vgchartz.com. Os campos disponíveis são:
+
+- Rank (Ranking de vendas)
+- Name (Nome do jogo)
+- Platform (Plataforma)
+- Year (Ano de lançamento)
+- Genre (Gênero)
+- Publisher (Publicadora)
+- NA_Sales (Vendas América do Norte)
+- EU_Sales (Vendas Europa)
+- JP_Sales (Vendas Japão)
+- Other_Sales (Outras regiões)
+- Global_Sales (Vendas globais)
