@@ -3,6 +3,26 @@
 
 Este projeto tem como objetivo aplicar técnicas de Machine Learning para prever se um jogo será um sucesso com base em atributos como plataforma, gênero, ano de lançamento e outros. O processo foi dividido em três notebooks principais, análise dos dados e visualização com Power BI.
 
+## Fonte dos Dados
+
+Os dados utilizados neste projeto estão disponíveis em:  
+[Kaggle - Video Game Sales](https://www.kaggle.com/datasets/gregorut/videogamesales)
+
+**Sobre o dataset:**  
+Este conjunto contém jogos com vendas acima de 100.000 cópias, extraídos do site vgchartz.com. Os campos disponíveis são:
+
+- Rank (Ranking de vendas)
+- Name (Nome do jogo)
+- Platform (Plataforma)
+- Year (Ano de lançamento)
+- Genre (Gênero)
+- Publisher (Publicadora)
+- NA_Sales (Vendas América do Norte)
+- EU_Sales (Vendas Europa)
+- JP_Sales (Vendas Japão)
+- Other_Sales (Outras regiões)
+- Global_Sales (Vendas globais)
+
 ## Estrutura do Projeto
 
 ```
@@ -11,20 +31,22 @@ Este projeto tem como objetivo aplicar técnicas de Machine Learning para prever
 │   ├── 02_modelagem_vg_sales_success.ipynb
 │   └── 03_insights_vg_sales_success.ipynb
 ├── Dados tratados
-│   ├── vg_sales_tratado.csv
+│   ├── video_game_sales_com_target.csv
 │   ├── analise_genero_sucesso_acuracia.csv
+│   ├── tabela_calendario.csv
 │   ├── analise_console_sucesso_acuracia.csv
 │   ├── analise_fabricante_previsao_acuracia.csv
 │   └── analise_regiao_sucesso.csv
 ├── Power BI
-│   └── Dashboard.pbix
+│   └── Análise de Vendas de Jogos.pbix
 ├── Prints
 │   ├── matriz_dummy.png
 │   ├── matriz_knn.png
 │   ├── matriz_random_forest.png
 │   ├── matriz_logistic_regression.png
-│   ├── dashboard_pagina1.png
-│   └── dashboard_pagina2.png
+│   ├── Dashboard_01.png
+│   ├── Dashboard_02.png
+│   └── Dashboard_03.png
 └── README.md
 ```
 
@@ -51,16 +73,16 @@ Todos os modelos foram treinados em um pipeline com tratamento de variáveis num
 ### Matriz de Confusão dos Modelos
 
 **Dummy Classifier**  
-![Dummy](Prints/matriz_dummy.png)
+![Dummy](Prints/Matriz_dummy.png)
 
 **KNN**  
-![KNN](Prints/matriz_knn.png)
+![KNN](Prints/Matriz_knn.png)
 
 **Random Forest**  
-![Random Forest](Prints/matriz_random_forest.png)
+![Random Forest](Prints/Matriz_random_forest.png)
 
 **Logistic Regression**  
-![Logistic Regression](Prints/matriz_logistic_regression.png)
+![Logistic Regression](Prints/Matriz_logistic_regression.png)
 
 ## 3. Geração de Insights (`03_insights_vg_sales_success.ipynb`)
 
@@ -88,25 +110,6 @@ Foi desenvolvido um painel interativo com as seguintes visões:
 
 ### Prints do Dashboard
 
-![Página 1](Prints/dashboard_pagina1.png)  
-![Página 2](Prints/dashboard_pagina2.png)
-
-## Fonte dos Dados
-
-Os dados utilizados neste projeto estão disponíveis em:  
-[Kaggle - Video Game Sales](https://www.kaggle.com/datasets/gregorut/videogamesales)
-
-**Sobre o dataset:**  
-Este conjunto contém jogos com vendas acima de 100.000 cópias, extraídos do site vgchartz.com. Os campos disponíveis são:
-
-- Rank (Ranking de vendas)
-- Name (Nome do jogo)
-- Platform (Plataforma)
-- Year (Ano de lançamento)
-- Genre (Gênero)
-- Publisher (Publicadora)
-- NA_Sales (Vendas América do Norte)
-- EU_Sales (Vendas Europa)
-- JP_Sales (Vendas Japão)
-- Other_Sales (Outras regiões)
-- Global_Sales (Vendas globais)
+![Video Game Market](Prints/Dashboard_01.png)  
+![Distribuição de Jogos e Gêneros por Fabricante](Prints/Dashboard_02.png)
+![Padrões de Sucesso nos Jogos: Uma Visão Guiada por Machine Learning](Prints/Dashboard_03.png)
